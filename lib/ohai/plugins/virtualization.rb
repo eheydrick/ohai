@@ -77,6 +77,8 @@ unless virtualization.nil? || !(virtualization[:role].eql?("host"))
         ['key','name','path'].each {|a| virtualization[:storage][pool][:volumes][v][a] = sv.send(a)}
         ['allocation','capacity','type'].each {|a| virtualization[:storage][pool][:volumes][v][a] = sv.info.send(a)}
       end
+      sp.free
+      GC.start
     end
 
     virtconn.close
